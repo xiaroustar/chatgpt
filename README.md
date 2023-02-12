@@ -27,5 +27,5 @@ Web环境即可，支持html、css、js；
 前台截图
 
 
-![ChatGPT聊天源码]([https://img-blog.csdnimg.cn/986d88e5d6004c08b0a0a42eca4468c4.png#pic_center](https://img.api.aa1.cn/2023/02/12/2421cb6f1890b.png))
+![ChatGPT聊天源码]([https://tucdn.wpon.cn/2023/02/12/c974d4176b51c.png](https://tucdn.wpon.cn/2023/02/12/c974d4176b51c.png))
 
