@@ -1,14 +1,22 @@
 <html lang="zh-cn">
+<!-- 
+    02/14 - 版本：v1.1 
+    GitHub更新地址：https://github.com/050310Y/chatgpt/ 
+    My博客更新地址：https://www.wpon.cn/28446.html 
+    切勿删除 免费产品 跟进更新不迷路 （删除记得更新地址收藏）
+    一言：免费不代表廉价，贡献不断，始于热爱；
+-->
 
 <head>
     <meta name="360-analysis-id" content="2x1c2x2p2w392s-xiarou">
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <meta charset="utf-8">
     <title>
         APIGPT - FreeChatGPT
     </title>
-    <link rel="stylesheet" href="https://img.api.aa1.cn/2023/02/12/fc4bbacb8bfdd.css">
-    <link rel="stylesheet" href="https://img.api.aa1.cn/2023/02/12/d08c5e4dac7af.css">
-    <meta charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <!-- CSS 样式 -->
+    <link rel="stylesheet" href="https://cdn.wpon.cn/2023/chatgpt/apigpt/css/style.css">
+    <link rel="stylesheet" href="https://cdn.wpon.cn/2023/chatgpt/apigpt/css/normalize.min.css">
 </head>
 
 <body data-theme="orange">
@@ -41,8 +49,9 @@
                         </div>
                     </div>
                 </div>
+                <span id="chatgpt-reflection"></span>
                 <div class="chat-area-footer">
-                    <input type="text" id="message" class="chat_message_up" placeholder="想与ChatGPT聊些什么..尝试回车">
+                    <input type="text" id="message" class="chat_message_up" placeholder="想与ChatGPT聊些什么..尝试回车！">
                     <button class="detail-button" id="send-button">
                             <span class="d-none d-md-inline-block me-2">
                                 Send
@@ -110,17 +119,7 @@
                 </div>
                 <div class="detail-changes">
                     <div class="detail-change">
-                        Change Color
-                        <div class="colors">
-                            <div class="color blue" data-color="blue">
-                            </div>
-                            <div class="color purple" data-color="purple">
-                            </div>
-                            <div class="color green" data-color="green">
-                            </div>
-                            <div class="color orange selected" data-color="orange">
-                            </div>
-                        </div>
+                        本项目由API·GPT提供技术支持
                     </div>
                     <div class="detail-change">
                         夏柔QQ：15001904 & WeChat：wordsafe
@@ -145,12 +144,14 @@
             var chatBody = $('#chat-body');
             var messageInput = $('#message');
             var sendButton = $('#send-button');
+
             // 发送消息
             sendButton.click(function() {
                 var message = messageInput.val();
                 if (message.trim() !== '') {
                     // 在聊天记录区域中添加用户输入的消息
                     appendMessage('You', message);
+                    appendloading('ChatGPT');
                     $('.chat-area').animate({
                             scrollTop: $('.chat-area')[0].scrollHeight
                         },
@@ -158,7 +159,8 @@
 
                     // 调用ChatGPT接口获取回复消息
                     $.ajax({
-                        //  接口来自夏柔API
+                        //  接口来自夏柔API 勿修改，会出错
+                        //  功能特点：大量聊天对话存储数据库 接口秒级响应回复
                         url: 'https://v1.apigpt.cn/chatgpt/',
                         type: 'POST',
                         data: {
@@ -166,6 +168,7 @@
                         },
                         success: function(response) {
                             // 在聊天记录区域中添加ChatGPT的回复消息
+                            deleteMessage('ChatGPT')
                             appendMessage('ChatGPT', response);
                             $('.chat-area').animate({
                                     scrollTop: $('.chat-area')[0].scrollHeight
@@ -179,7 +182,39 @@
                     messageInput.val('');
                 }
             });
+            // 在聊天记录区域中添加一条消息
+            function appendloading(from) {
+                var messageElement = $('<div class="chat-msg" id="loads"></div>');
+                var messagePend = $('<div class="chat-msg-profile"></div>')
+                    // var avatarElement = $('');
+                var messageContentElement = $('<div class="chat-msg-text">AI思考中...</div>');
 
+                if (from === 'You') {
+                    messageElement.addClass('owner');
+                    var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/043fbdaf8c1b8.svg" alt=""><div class="chat-msg-date">我</div>');
+                    // var avatarElement = $('<div class="chat-msg-date">2023-02-12 00:00:01</div>');
+                } else { // robot
+
+                    var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/59c6fee6f7e66.png" alt="">');
+                    var tipsElement = $('<div class="chat-msg-date">本消息由OpenAI·ChatGPT提供</div>');
+                    var chatgpt_reflection = document.getElementById("chatgpt-reflection").innerText = '';
+                }
+
+                messagePend.append(avatarElement);
+                messagePend.append(tipsElement);
+                messageElement.append(messagePend);
+                messageElement.append(messageContentElement);
+
+
+
+                chatBody.append(messageElement);
+                // 滚动聊天记录区域到底部
+                chatBody.scrollTop(chatBody[0].scrollHeight);
+            }
+
+            function deleteMessage(from) {
+                $("#loads").remove();
+            }
             // 在聊天记录区域中添加一条消息
             function appendMessage(from, message) {
                 var messageElement = $('<div class="chat-msg" id="chatai"></div>');
@@ -190,7 +225,6 @@
                 if (from === 'You') {
                     messageElement.addClass('owner');
                     var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/043fbdaf8c1b8.svg" alt=""><div class="chat-msg-date">我</div>');
-                    // var avatarElement = $('<div class="chat-msg-date">2023-02-12 00:00:01</div>');
                 } else { // robot
                     var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/59c6fee6f7e66.png" alt="">');
                     var tipsElement = $('<div class="chat-msg-date">本消息由OpenAI·ChatGPT提供</div>');
