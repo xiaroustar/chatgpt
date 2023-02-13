@@ -6,6 +6,14 @@
 
 Web环境即可，支持html、css、js；
 
+# 更新日志
+
+- 02/14 v1.1
+PS：由暮年独家赞助开发资金进度 鸣谢暮年；
+  1、大量聊天对话存储数据库，接口秒级响应回复
+  2、增加 AI思考中，用户发送消息预回复（AI思考中）
+  3、优化、删除部分代码，使程序更加流畅
+
 # 接口信息
 
 来自夏柔API独家赞助提供无限制调用接口：[https://api.aa1.cn/doc/chatgpts.html](https://api.aa1.cn/doc/chatgpts.html)
