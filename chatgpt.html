@@ -1,6 +1,6 @@
 <html lang="zh-cn">
 <!-- 
-    02/14 - 版本：v1.1 
+    02/14 - 版本：v1.2
     GitHub更新地址：https://github.com/050310Y/chatgpt/ 
     My博客更新地址：https://www.wpon.cn/28446.html 
     切勿删除 免费产品 跟进更新不迷路 （删除记得更新地址收藏）
@@ -17,6 +17,15 @@
     <!-- CSS 样式 -->
     <link rel="stylesheet" href="https://cdn.wpon.cn/2023/chatgpt/apigpt/css/style.css">
     <link rel="stylesheet" href="https://cdn.wpon.cn/2023/chatgpt/apigpt/css/normalize.min.css">
+    <!--弹窗-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.wpon.cn/2023/newtc/css/message.css" />
+    <script src="https://cdn.wpon.cn/2023/newtc/js/jquery.min.js"></script>
+    <script src="https://cdn.wpon.cn/2023/newtc/js/message.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        function success() {
+            $.message({ type: 'success', content: "发送成功" });
+        }
+    </script>
 </head>
 
 <body data-theme="orange">
@@ -46,6 +55,21 @@
                                     </a> .
                                 <br> 如果您只想体验与ChatGPT聊天，与ChatGPT连接通信，只需要在下面想聊的内容即可；
                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-msg">
+                        <div class="chat-msg-profile">
+                            <img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/59c6fee6f7e66.png" alt="">
+                            <div class="chat-msg-date">本消息由OpenAI·ChatGPT提供</div>
+                        </div>
+                        <div class="chat-msg-content">
+                            <div class="chat-msg-text">
+
+[<span style="color:red">欢迎语</span>] 你好，朋友
+<br>我是<span style="color:blue">OpenAI</span>旗下强大的<span style="color:blue">ChatGPT·AI</span >，由<span style="color:green">API·GPT</span>技术开发支持，欢迎随时向我发起挑战！
+<br>如有 <span style="color:red">Bug/回复空白/响应超时</span> 等问题，请立即反馈（Q：15001904，WX：wordsafe）
+</div>
                         </div>
                     </div>
                 </div>
@@ -130,8 +154,6 @@
         </div>
     </div>
     <!-- JS Start -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-    </script>
     <script>
         document.onkeydown = function(e) {
             if (!e) e = window.event; //火狐中是 window.event
@@ -187,7 +209,7 @@
                 var messageElement = $('<div class="chat-msg" id="loads"></div>');
                 var messagePend = $('<div class="chat-msg-profile"></div>')
                     // var avatarElement = $('');
-                var messageContentElement = $('<div class="chat-msg-text">AI思考中...</div>');
+                var messageContentElement = $('<div class="chat-msg-text" style="margin-left: 12px;">AI思考中...</div>');
 
                 if (from === 'You') {
                     messageElement.addClass('owner');
@@ -217,10 +239,11 @@
             }
             // 在聊天记录区域中添加一条消息
             function appendMessage(from, message) {
+                success();
                 var messageElement = $('<div class="chat-msg" id="chatai"></div>');
                 var messagePend = $('<div class="chat-msg-profile"></div>')
                     // var avatarElement = $('');
-                var messageContentElement = $('<div class="chat-msg-text"></div>');
+                var messageContentElement = $('<div class="chat-msg-text" style="margin-left: 12px;"></div>');
 
                 if (from === 'You') {
                     messageElement.addClass('owner');
