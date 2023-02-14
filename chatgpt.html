@@ -1,6 +1,6 @@
 <html lang="zh-cn">
 <!-- 
-    02/14 - 版本：v1.2
+    02/14 - 版本：v1.3
     GitHub更新地址：https://github.com/050310Y/chatgpt/ 
     My博客更新地址：https://www.wpon.cn/28446.html 
     切勿删除 免费产品 跟进更新不迷路 （删除记得更新地址收藏）
@@ -21,11 +21,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.wpon.cn/2023/newtc/css/message.css" />
     <script src="https://cdn.wpon.cn/2023/newtc/js/jquery.min.js"></script>
     <script src="https://cdn.wpon.cn/2023/newtc/js/message.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        function success() {
-            $.message({ type: 'success', content: "发送成功" });
-        }
-    </script>
 </head>
 
 <body data-theme="orange">
@@ -57,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="chat-msg">
                         <div class="chat-msg-profile">
                             <img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/59c6fee6f7e66.png" alt="">
@@ -66,10 +61,10 @@
                         <div class="chat-msg-content">
                             <div class="chat-msg-text">
 
-[<span style="color:red">欢迎语</span>] 你好，朋友
-<br>我是<span style="color:blue">OpenAI</span>旗下强大的<span style="color:blue">ChatGPT·AI</span >，由<span style="color:green">API·GPT</span>技术开发支持，欢迎随时向我发起挑战！
-<br>如有 <span style="color:red">Bug/回复空白/响应超时</span> 等问题，请立即反馈（Q：15001904，WX：wordsafe）
-</div>
+                                [<span style="color:red">欢迎语</span>] 你好，朋友
+                                <br>我是<span style="color:blue">OpenAI</span>旗下强大的<span style="color:blue">ChatGPT·AI</span >，由<span style="color:green">API·GPT</span>技术开发支持，欢迎随时向我发起挑战！
+                                <br>如有 <span style="color:red">Bug/回复空白/响应超时</span> 等问题，请立即反馈（Q：15001904，WX：wordsafe）
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,8 +148,29 @@
             </div>
         </div>
     </div>
+    <!-- GPT回复消息提示音 -->
+    <audio src="https://img.api.aa1.cn/2023/02/14/0c88eedf32d22.MP3" id="gpt_ok"></audio>
+    <!-- 发送消息提示音 -->
+    <audio src="https://img.api.aa1.cn/2023/02/14/363dd6594350b.mp3" id="you_success"></audio>
     <!-- JS Start -->
     <script>
+        function success() {
+            var audioEle = document.getElementById("you_success"); // 发送消息提示音 
+            audioEle.play();
+            $.message({
+                type: 'success',
+                content: "发送成功"
+            });
+        }
+
+        function gpt_ok() {
+            var audioEle = document.getElementById("gpt_ok"); // GPT回复消息提示音
+            audioEle.play();
+            $.message({
+                type: 'warning',
+                content: "来消息啦～"
+            });
+        }
         document.onkeydown = function(e) {
             if (!e) e = window.event; //火狐中是 window.event
             if ((e.keyCode || e.which) == 13) {
@@ -183,6 +199,7 @@
                     $.ajax({
                         //  接口来自夏柔API 勿修改，会出错
                         //  功能特点：大量聊天对话存储数据库 接口秒级响应回复
+                        // 若不想出现机器人的 “问题” “答” 请将下面的地址更换为：https://v1.apigpt.cn/nchatgpt/
                         url: 'https://v1.apigpt.cn/chatgpt/',
                         type: 'POST',
                         data: {
@@ -216,7 +233,6 @@
                     var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/043fbdaf8c1b8.svg" alt=""><div class="chat-msg-date">我</div>');
                     // var avatarElement = $('<div class="chat-msg-date">2023-02-12 00:00:01</div>');
                 } else { // robot
-
                     var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/59c6fee6f7e66.png" alt="">');
                     var tipsElement = $('<div class="chat-msg-date">本消息由OpenAI·ChatGPT提供</div>');
                     var chatgpt_reflection = document.getElementById("chatgpt-reflection").innerText = '';
@@ -239,16 +255,17 @@
             }
             // 在聊天记录区域中添加一条消息
             function appendMessage(from, message) {
-                success();
                 var messageElement = $('<div class="chat-msg" id="chatai"></div>');
                 var messagePend = $('<div class="chat-msg-profile"></div>')
                     // var avatarElement = $('');
                 var messageContentElement = $('<div class="chat-msg-text" style="margin-left: 12px;"></div>');
 
                 if (from === 'You') {
+                    success();
                     messageElement.addClass('owner');
                     var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/043fbdaf8c1b8.svg" alt=""><div class="chat-msg-date">我</div>');
                 } else { // robot
+                    gpt_ok(); // 消息提示音
                     var avatarElement = $('<img class="chat-msg-img" src="https://img.api.aa1.cn/2023/02/12/59c6fee6f7e66.png" alt="">');
                     var tipsElement = $('<div class="chat-msg-date">本消息由OpenAI·ChatGPT提供</div>');
                 }
