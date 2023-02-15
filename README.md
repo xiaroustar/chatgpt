@@ -2,6 +2,16 @@
 
 源码来自：chat.apigpt.cn ，支持与ChatGPT聊天对话；
 
+# 无限制ChatGPT接口专题：https://api.aa1.cn/special/chatgpt
+- 2023/02/15 更新 第（四）期
+🔥免费密钥：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
+🔥🔥免费普通共享账号：NoyaIrina8766@outlook.com 密码：9zcoDImx
+🔥🔥🔥免费PLUS共享账号：plus@gptocean.com 密码：V8EoUD0ekl
+- 长期免费普通共享账户（独家特供）
+账户：TabithaSabah4937@outlook.com 密码：IiBqVzoT
+账户：KathrynDelphine876@outlook.com 密码：HcLKvTTl
+账户：LeslieBrawley8687@outlook.com 密码：2JThadLw
+账户：WilsonUmmi6583@outlook.com 密码：xnXsaWLR
 # 部署环境
 
 Web环境即可，支持html、css、js；
