@@ -219,7 +219,10 @@
             }
         }
         $(document).ready(function() {
-
+$('.chat-area').animate({
+                                    scrollTop: $('.chat-area')[0].scrollHeight
+                                },
+                                10);
             var chatBody = $('#chat-body');
             var messageInput = $('#message');
             var sendButton = $('#send-button');
@@ -296,6 +299,7 @@
             }
             // 在聊天记录区域中添加一条消息
             function appendMessage(from, message) {
+                
                 var messageElement = $('<div class="chat-msg" id="chatai"></div>');
                 var messagePend = $('<div class="chat-msg-profile"></div>')
                     // var avatarElement = $('');
@@ -322,6 +326,7 @@
                 localStorage.setItem('message',JSON.stringify(chatBody.html()))
                 // 滚动聊天记录区域到底部
                 chatBody.scrollTop(chatBody[0].scrollHeight);
+                
             }
             chatBody.html(JSON.parse(localStorage.getItem('message')))
         });
