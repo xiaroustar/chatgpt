@@ -1,7 +1,7 @@
 # 前言
 
 源码来自：chat.apigpt.cn ，支持与ChatGPT聊天对话；
-[img]https://img.api.aa1.cn/2023/03/02/4940020586331.png[/img]
+![apigpt流程图.png](https://img.api.aa1.cn/2023/03/02/4940020586331.png)
 # 无限制ChatGPT接口专题：https://api.aa1.cn/special/chatgpt
 - 2023/02/15 更新 第（四）期
 🔥免费密钥：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
